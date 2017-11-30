@@ -1,0 +1,75 @@
+@mixin colourScheme($team, $primaryColour, $secondaryColour) {
+    .wrapper--#{$team} {
+        .header {
+            color: $primaryColour;
+        }
+
+        .header:before {
+            background-color: $secondaryColour;
+        }
+
+        .header__name--type {
+            color: $secondaryColour;
+        }
+
+        .stats__number {
+            color: $primaryColour;
+        }
+
+        .header__meta span:first-of-type:after {
+            background-color: $secondaryColour;
+        }
+    }
+
+    .team-1--#{$team} {
+        .team-1 {
+            color: $primaryColour;
+        }
+    }
+
+    .team-2--#{$team} {
+        .team-2 {
+            color: $primaryColour;
+        }
+    }
+}
+
+@include colourScheme('generic', $c-neutral-1, $c-news-main-2);
+@include colourScheme('arizona-cardinals', $c-live-main-1, $c-neutral-1);
+@include colourScheme('atlanta-falcons', $c-live-main-1, $c-neutral-1);
+@include colourScheme('baltimore-ravens', $c-features-support-2, $c-multimedia-main-2);
+@include colourScheme('buffalo-bills', $c-multimedia-support-3, $c-live-main-2);
+@include colourScheme('carolina-panthers', $c-neutral-1, $c-news-support-2);
+@include colourScheme('chicago-bears', $c-multimedia-support-3, $c-comment-support-4);
+@include colourScheme('cincinnati-bengals', $c-comment-support-4, $c-neutral-1);
+@include colourScheme('cleveland-browns', $c-comment-support-4, $c-neutral-1);
+@include colourScheme('dallas-cowboys', $c-multimedia-support-3, $c-news-main-1);
+@include colourScheme('denver-broncos', $c-comment-support-4, $c-multimedia-support-3);
+@include colourScheme('detroit-lions', $c-news-support-2, $c-neutral-2);
+@include colourScheme('green-bay-packers', $c-maps-main-1, $c-multimedia-main-2);
+@include colourScheme('houston-texans', $c-multimedia-support-3, $c-live-main-1);
+@include colourScheme('indianapolis-colts', $c-news-support-2, $c-news-main-1);
+@include colourScheme('jacksonville-jaguars', #008080, $c-maps-support-1);
+@include colourScheme('kansas-city-chiefs', $c-live-main-1, $c-multimedia-main-2);
+@include colourScheme('los-angeles-chargers', $c-multimedia-support-3, $c-multimedia-main-2);
+@include colourScheme('los-angeles-rams', $c-multimedia-support-3, $c-maps-support-1);
+@include colourScheme('miami-dolphins', #008080, $c-comment-support-4);
+@include colourScheme('minnesota-vikings', $c-features-support-2, $c-multimedia-main-2);
+@include colourScheme('new-england-patriots', $c-multimedia-support-3, $c-live-main-2);
+@include colourScheme('new-orleans-saints', $c-neutral-1, $c-maps-support-1);
+@include colourScheme('new-york-giants', $c-multimedia-support-3, $c-live-main-2);
+@include colourScheme('new-york-jets', $c-maps-main-1, $c-neutral-1);
+@include colourScheme('oakland-raiders', $c-neutral-1, $c-neutral-2);
+@include colourScheme('philadelphia-eagles', $c-maps-main-1, $c-neutral-2);
+@include colourScheme('pittsburgh-steelers', $c-neutral-1, $c-multimedia-main-2);
+@include colourScheme('san-francisco-49ers', $c-live-main-1, $c-maps-support-1);
+@include colourScheme('seattle-seahawks', $c-multimedia-support-3, $c-news-support-5);
+@include colourScheme('tampa-bay-buccaneers', $c-live-main-1, $c-neutral-1);
+@include colourScheme('tennessee-titans', $c-news-support-2, $c-multimedia-support-3);
+@include colourScheme('washington', $c-live-support-2, $c-multimedia-main-2);
+
+.wrapper--generic {
+    .header__meta .input[data-input='team'] {
+        display: none;
+    }
+}

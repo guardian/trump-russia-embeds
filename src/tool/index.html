@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="." target="_blank">
+    <title>NFL Graphics Tool</title>
+</head>
+
+<body>
+    <link href="https://interactive.guim.co.uk/gia/fonts/v1/fonts.css" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            color: #333;
+            font-family: 'Guardian Egyptian Web';
+            font-weight: 900;
+        }
+
+        h1 {
+            font-size: 32px;
+            line-height: 1.2;
+            color: #333;
+            border-bottom: 1px solid #dfdfdf;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+
+        hr {
+            margin-right: 12px;
+            border: 0;
+            background-color: #dfdfdf;
+            height: 1px;
+        }
+
+        main {
+            display: flex;
+        }
+
+        .options,
+        .preview {
+            width: 50%;
+        }
+
+        .options-group {
+            display: none;
+        }
+
+        .options-group--current {
+            display: block;
+        }
+
+        .options__label,
+        .preview__label {
+            margin: 6px 0;
+            font-size: 20px;
+        }
+
+        .options__label {
+            margin-top: 24px;
+        }
+
+        .options__sub-label {
+            font-size: 16px;
+            line-height: 0.9;
+            font-family: 'Guardian Text Sans Web';
+            color: #676767;
+            margin: 4px 12px 4px 0;
+            float: left;
+            width: 120px;
+            font-weight: normal;
+        }
+
+        .options__input {
+            min-width: 120px;
+            width: calc(100% - 144px);
+            box-sizing: border-box;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .preview {
+            padding-left: 10px;
+            border-left: 1px solid #dfdfdf;
+        }
+
+        .preview__iframe {
+            border: 0;
+            height: 300px;
+            width: 380px;
+        }
+
+        .preview__url {
+            width: calc(100% - 60px);
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            font-family: 'Guardian Text Sans Web';
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+            font-family: 'Guardian Text Sans Web';
+            height: 36px;
+        }
+    </style>
+
+    <h1>NFL Graphics Tool</h1>
+
+    <main>
+        <div class='options'>
+            <h2 class='options__sub-label'>Embed type</h2>
+            <select name='type' class='options__input options__input--type'>
+                <option value='player'>Player</option>
+                <option value='head-to-head'>Head To Head</option>
+            </select>
+
+            <div class='options-group options-group--player options-group--current'>
+                <hr />
+
+                <h2 class='options__sub-label'>Headline</h2>
+                <input class='options__input' type='text' value='vs New York Giants' name='headline'>
+
+                <h2 class='options__label'>Player</h2>
+                <h2 class='options__sub-label'>Name</h2>
+                <input class='options__input' type='text' value='Forrest Lamp' name='name'>
+
+                <hr />
+
+                <h2 class='options__sub-label'>Team</h2>
+                <select name='colour-scheme' class='options__input options__input--team'>
+                    <option value='generic'>No team</option>
+                    <option value='arizona-cardinals'>Arizona Cardinals</option>
+                    <option value='atlanta-falcons'>Atlanta Falcons</option>
+                    <option value='baltimore-ravens'>Baltimore Ravens</option>
+                    <option value='buffalo-bills'>Buffalo Bills</option>
+                    <option value='carolina-panthers'>Carolina Panthers</option>
+                    <option value='chicago-bears'>Chicago Bears</option>
+                    <option value='cincinnati-bengals'>Cincinnati Bengals</option>
+                    <option value='cleveland-browns'>Cleveland Browns</option>
+                    <option value='dallas-cowboys'>Dallas Cowboys</option>
+                    <option value='denver-broncos'>Denver Broncos</option>
+                    <option value='detroit-lions'>Detroit Lions</option>
+                    <option value='green-bay-packers'>Green Bay Packers</option>
+                    <option value='houston-texans'>Houston Texans</option>
+                    <option value='indianapolis-colts'>Indianapolis Colts</option>
+                    <option value='jacksonville-jaguars'>Jacksonville Jaguars</option>
+                    <option value='kansas-city-chiefs'>Kansas City Chiefs</option>
+                    <option value='los-angeles-chargers'>Los Angeles Chargers</option>
+                    <option value='los-angeles-rams'>Los Angeles Rams</option>
+                    <option value='miami-dolphins'>Miami Dolphins</option>
+                    <option value='minnesota-vikings'>Minnesota Vikings</option>
+                    <option value='new-england-patriots'>New England Patriots</option>
+                    <option value='new-orleans-saints'>New Orleans Saints</option>
+                    <option value='new-york-giants'>New York Giants</option>
+                    <option value='new-york-jets'>New York Jets</option>
+                    <option value='oakland-raiders'>Oakland Raiders</option>
+                    <option value='philadelphia-eagles'>Philadelphia Eagles</option>
+                    <option value='pittsburgh-steelers'>Pittsburgh Steelers</option>
+                    <option value='san-francisco-49ers'>San Francisco 49ers</option>
+                    <option value='seattle-seahawks'>Seattle Seahawks</option>
+                    <option value='tampa-bay-buccaneers'>Tampa Bay Buccaneers</option>
+                    <option value='tennessee-titans'>Tennessee Titans</option>
+                    <option value='washington'>Washington</option>
+                </select>
+
+                <hr />
+
+                <h2 class='options__sub-label'>Position</h2>
+                <select name='position' class='options__input options__input--position'>
+                    <option value='C'>Center</option>
+                    <option value='G'>Offensive guard</option>
+                    <option value='T'>Offensive tackle</option>
+                    <option value='QB' selected>Quarterback</option>
+                    <option value='RB'>Running back</option>
+                    <option value='WR'>Wide receiver</option>
+                    <option value='TE'>Tight end</option>
+                    <option value='DT'>Defensive tackle</option>
+                    <option value='DE'>Defensive end</option>
+                    <option value='LB'>Linebacker</option>
+                    <option value='CB'>Cornerback</option>
+                    <option value='FB'>Full back</option>
+                    <option value='S'>Safety</option>
+                    <option value='K'>Kicker</option>
+                    <option value='P'>Punter</option>
+                </select>
+
+                <hr />
+
+                <h2 class='options__sub-label'>Number</h2>
+                <input class='options__input' type="number" name="player-number" value="77" min="1" max="99">
+
+                <h2 class='options__label'>Stats</h2>
+                <div class='stats'>
+
+                </div>
+            </div>
+
+            <div class='options-group options-group--head-to-head'>
+                <hr />
+
+                <h2 class='options__sub-label'>Position</h2>
+                <select name='position' class='options__input options__input--position'>
+                    <option value='C'>Center</option>
+                    <option value='G'>Offensive guard</option>
+                    <option value='T'>Offensive tackle</option>
+                    <option value='QB' selected>Quarterback</option>
+                    <option value='RB'>Running back</option>
+                    <option value='WR'>Wide receiver</option>
+                    <option value='TE'>Tight end</option>
+                    <option value='DT'>Defensive tackle</option>
+                    <option value='DE'>Defensive end</option>
+                    <option value='LB'>Linebacker</option>
+                    <option value='CB'>Cornerback</option>
+                    <option value='FB'>Full back</option>
+                    <option value='S'>Safety</option>
+                    <option value='K'>Kicker</option>
+                    <option value='P'>Punter</option>
+                </select>
+
+                <h2 class='options__label'>Player</h2>
+                <h2 class='options__sub-label'>Name</h2>
+                <input class='options__input' type='text' value='Forrest Lamp' name='name-1'>
+
+                <hr />
+
+                <h2 class='options__sub-label'>Team</h2>
+                <select name='colour-scheme-1' class='options__input options__input--team'>
+                    <option value='arizona-cardinals'>Arizona Cardinals</option>
+                    <option value='atlanta-falcons'>Atlanta Falcons</option>
+                    <option value='baltimore-ravens'>Baltimore Ravens</option>
+                    <option value='buffalo-bills'>Buffalo Bills</option>
+                    <option value='carolina-panthers'>Carolina Panthers</option>
+                    <option value='chicago-bears'>Chicago Bears</option>
+                    <option value='cincinnati-bengals'>Cincinnati Bengals</option>
+                    <option value='cleveland-browns'>Cleveland Browns</option>
+                    <option value='dallas-cowboys'>Dallas Cowboys</option>
+                    <option value='denver-broncos'>Denver Broncos</option>
+                    <option value='detroit-lions'>Detroit Lions</option>
+                    <option value='green-bay-packers'>Green Bay Packers</option>
+                    <option value='houston-texans'>Houston Texans</option>
+                    <option value='indianapolis-colts'>Indianapolis Colts</option>
+                    <option value='jacksonville-jaguars'>Jacksonville Jaguars</option>
+                    <option value='kansas-city-chiefs'>Kansas City Chiefs</option>
+                    <option value='los-angeles-chargers'>Los Angeles Chargers</option>
+                    <option value='los-angeles-rams'>Los Angeles Rams</option>
+                    <option value='miami-dolphins'>Miami Dolphins</option>
+                    <option value='minnesota-vikings'>Minnesota Vikings</option>
+                    <option value='new-england-patriots'>New England Patriots</option>
+                    <option value='new-orleans-saints'>New Orleans Saints</option>
+                    <option value='new-york-giants'>New York Giants</option>
+                    <option value='new-york-jets'>New York Jets</option>
+                    <option value='oakland-raiders'>Oakland Raiders</option>
+                    <option value='philadelphia-eagles'>Philadelphia Eagles</option>
+                    <option value='pittsburgh-steelers'>Pittsburgh Steelers</option>
+                    <option value='san-francisco-49ers'>San Francisco 49ers</option>
+                    <option value='seattle-seahawks'>Seattle Seahawks</option>
+                    <option value='tampa-bay-buccaneers'>Tampa Bay Buccaneers</option>
+                    <option value='tennessee-titans'>Tennessee Titans</option>
+                    <option value='washington'>Washington</option>
+                </select>
+
+                <hr />
+
+                <div class='stats' data-player='1'>
+                </div>
+
+                <h2 class='options__label'>Player</h2>
+                <h2 class='options__sub-label'>Name</h2>
+                <input class='options__input' type='text' value='Johnny Footballsman' name='name-2'>
+
+                <hr />
+
+                <h2 class='options__sub-label'>Team</h2>
+                <select name='colour-scheme-2' class='options__input options__input--team'>
+                    <option value='arizona-cardinals'>Arizona Cardinals</option>
+                    <option value='atlanta-falcons'>Atlanta Falcons</option>
+                    <option value='baltimore-ravens'>Baltimore Ravens</option>
+                    <option value='buffalo-bills'>Buffalo Bills</option>
+                    <option value='carolina-panthers'>Carolina Panthers</option>
+                    <option value='chicago-bears'>Chicago Bears</option>
+                    <option value='cincinnati-bengals'>Cincinnati Bengals</option>
+                    <option value='cleveland-browns'>Cleveland Browns</option>
+                    <option value='dallas-cowboys'>Dallas Cowboys</option>
+                    <option value='denver-broncos'>Denver Broncos</option>
+                    <option value='detroit-lions'>Detroit Lions</option>
+                    <option value='green-bay-packers'>Green Bay Packers</option>
+                    <option value='houston-texans'>Houston Texans</option>
+                    <option value='indianapolis-colts'>Indianapolis Colts</option>
+                    <option value='jacksonville-jaguars'>Jacksonville Jaguars</option>
+                    <option value='kansas-city-chiefs'>Kansas City Chiefs</option>
+                    <option value='los-angeles-chargers'>Los Angeles Chargers</option>
+                    <option value='los-angeles-rams'>Los Angeles Rams</option>
+                    <option value='miami-dolphins'>Miami Dolphins</option>
+                    <option value='minnesota-vikings'>Minnesota Vikings</option>
+                    <option value='new-england-patriots'>New England Patriots</option>
+                    <option value='new-orleans-saints'>New Orleans Saints</option>
+                    <option selected="selected" value='new-york-giants'>New York Giants</option>
+                    <option value='new-york-jets'>New York Jets</option>
+                    <option value='oakland-raiders'>Oakland Raiders</option>
+                    <option value='philadelphia-eagles'>Philadelphia Eagles</option>
+                    <option value='pittsburgh-steelers'>Pittsburgh Steelers</option>
+                    <option value='san-francisco-49ers'>San Francisco 49ers</option>
+                    <option value='seattle-seahawks'>Seattle Seahawks</option>
+                    <option value='tampa-bay-buccaneers'>Tampa Bay Buccaneers</option>
+                    <option value='tennessee-titans'>Tennessee Titans</option>
+                    <option value='washington'>Washington</option>
+                </select>
+
+                <hr />
+
+                <div class='stats' data-player='2'>
+                </div>
+
+            </div>
+        </div>
+
+        <div class='preview'>
+            <h2 class='preview__label'>Preview</h2>
+            <iframe class='preview__iframe' data-url='@@assetPath@@/embed/nfl-graphics/@@version@@/'></iframe>
+
+            <h2 class='preview__label'>Embed Url</h2>
+            <input type='text' class='preview__url'>
+        </div>
+    </main>
+
+    <script type='text/javascript'>
+        var inputs, groups, defaultUrl;
+
+        var stats = {
+            'QB' : ['TDs', 'Int', 'Yds', 'Rating'],
+            'RB' : ['Car', 'Yds', 'Avg', 'TDs'],
+            'FB' : ['Car', 'Yds', 'Avg', 'TDs'],
+            'WR' : ['Rec', 'Yds', 'Avg', 'TDs'],
+            'TE' : ['Rec', 'Yds', 'Avg', 'TDs'],
+            'P'  : ['Punts', 'Avg', 'Lng', 'In 20'],
+            'K'  : ['FGM', 'FGA', 'Pct', 'Lng'],
+            'DT' : ['Tckl', 'Sck', 'FF', 'Int'],
+            'DE' : ['Tckl', 'Sck', 'FF', 'Int'],
+            'LB' : ['Tckl', 'Sck', 'FF', 'Int'],
+            'S'  : ['Tckl', 'Sck', 'FF', 'Int'],
+            'CB' : ['Tckl', 'Sck', 'FF', 'Int'],
+            'G'  : ['G', 'GS'],
+            'C'  : ['G', 'GS'],
+            'T'  : ['G', 'GS']
+        }
+
+        function buildUrlFromInputValues() {
+            var group = document.getElementsByClassName('options__input--type')[0].value;
+            var params = '';
+
+            for (var i = 0; i < inputs.length; i++) {
+                params += inputs[i].name + '=' + inputs[i].value + '&';
+            }
+
+            if (group === 'player') {
+                var selectedTeam = document.getElementsByClassName('options-group--player')[0].getElementsByClassName('options__input--team')[0];
+                    selectedTeam = selectedTeam[selectedTeam.selectedIndex].innerHTML;
+
+                params += 'team=' + selectedTeam;
+            } else if (group === 'head-to-head') {
+                var selectedTeam1 = document.getElementsByClassName('options-group--head-to-head')[0].getElementsByClassName('options__input--team')[0];
+                    selectedTeam1 = selectedTeam1[selectedTeam1.selectedIndex].innerHTML;
+
+                var selectedTeam2 = document.getElementsByClassName('options-group--head-to-head')[0].getElementsByClassName('options__input--team')[1];
+                    selectedTeam2 = selectedTeam2[selectedTeam2.selectedIndex].innerHTML;
+
+                params += 'team-1=' + selectedTeam1 + '&team-2=' + selectedTeam2; 
+            }
+
+            return defaultUrl + document.getElementsByClassName('options__input--type')[0].value + '.html?' + encodeURI(params);
+        }
+
+        function updateUrl() {
+            var url = buildUrlFromInputValues();
+            document.getElementsByClassName('preview__iframe')[0].setAttribute('src', url);
+            document.getElementsByClassName('preview__url')[0].setAttribute('value', url);
+        }
+
+        function bindings() {
+            document.getElementsByClassName('options__input--type')[0].addEventListener('change', changeGroup);
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('change', updateUrl);
+            }
+
+            document.getElementsByClassName('options__input--position')[0].addEventListener('change', setStats);
+            document.getElementsByClassName('options__input--position')[1].addEventListener('change', setStats);
+        };
+
+        function changeGroup() {
+            var group = document.getElementsByClassName('options__input--type')[0].value;
+
+            document.getElementsByClassName('options-group--current')[0].classList.remove('options-group--current');
+            document.getElementsByClassName('options-group--' + group)[0].classList.add('options-group--current');
+
+            init();
+        }
+
+        function setVars() {
+            groups = document.getElementsByClassName('options-group');
+            inputs = document.getElementsByClassName('options-group--current')[0].getElementsByClassName('options__input');
+            defaultUrl = document.getElementsByClassName('preview__iframe')[0].getAttribute('data-url');
+        }
+
+        function setStats()  {
+            var position = document.getElementsByClassName('options-group--current')[0].getElementsByClassName('options__input--position')[0].value;
+            var positionStats = stats[position];
+            var el = document.getElementsByClassName('options-group--current')[0].getElementsByClassName('stats');
+
+            for (var els = 0; els < el.length; els++) {
+                var number = el[els].getAttribute('data-player');
+                el[els].innerHTML = '';
+
+                for (var i = 0; i < positionStats.length; i++) {
+                    el[els].innerHTML += '<h2 class=\'options__sub-label\'>' + positionStats[i] + '</h2><input class=\'options__input hidden\' type=\'text\' name=\'stat-name' + (number ? '-' + number : '') + '-' + i +'\' value=\'' + positionStats[i] + '\'><input class=\'options__input\' type=\"number\" name=\"stat' + (number ? '-' + number : '') + '-' + i + '\" value=\"0\" ><hr />';
+                }
+            }
+
+            bindings();
+            updateUrl();
+        }
+
+        function init() {
+            setVars();
+            setStats();
+            bindings();
+            updateUrl();
+        }
+
+        init();
+    </script>
+</body>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="." target="_blank">
+    <title>NFL Graphic</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+    <script>
+        iframeMessenger.enableAutoResize();
+    </script> 
+
+    <link href="@@assetPath@@/embed/nfl-graphics/@@version@@/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='header'>
+            <h1 class='header__name input' data-input='name'></h1>
+            <h1 class='header__name header__name--type input' data-input='headline'></h1>
+
+            <h2 class='header__meta'>
+                <span class='input' data-input='team'></span>
+                <span class='input' data-input='position'></span>
+            </h2>
+
+            <span class='header__number input' data-input='player-number'></span>
+        </div>
+
+        <div class='stats'>
+            <div class='stats__stat stats__stat--0'>
+                <span class='input' data-input='stat-name-0'></span>
+                <span class="stats__number input" data-input='stat-0'></span>
+            </div>
+            <div class='stats__stat stats__stat--1'>
+                <span class='input' data-input='stat-name-1'></span>
+                <span class="stats__number input" data-input='stat-1'></span>
+            </div>
+            <div class='stats__stat stats__stat--2'>
+                <span class='input' data-input='stat-name-2'></span>
+                <span class="stats__number input" data-input='stat-2'></span>
+            </div>
+            <div class='stats__stat stats__stat--3'>
+                <span class='input' data-input='stat-name-3'></span>
+                <span class="stats__number input" data-input='stat-3'></span>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript'>
+        var params;
+
+        function getPageParameters(query) {
+            query = query.split('?')[1];
+
+            var vars = query.split("&");
+            var query_string = {};
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+
+                if (typeof query_string[pair[0]] === "undefined") {
+                    query_string[pair[0]] = decodeURIComponent(pair[1]);
+                } else if (typeof query_string[pair[0]] === "string") {
+                    var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+                    query_string[pair[0]] = arr;
+                } else {
+                    query_string[pair[0]].push(decodeURIComponent(pair[1]));
+                }
+            }
+
+            return query_string;
+        }
+
+        function injectParams() {
+            var elementsToBePopulated = document.getElementsByClassName('input');
+
+            for (var i = 0; i < elementsToBePopulated.length; i++) {
+                var elementKey = elementsToBePopulated[i].getAttribute('data-input');
+
+                if (params[elementKey]) {
+                    elementsToBePopulated[i].innerHTML = params[elementKey];
+                }
+            }
+        }
+
+
+        function setClass() {
+            var wrapper = document.getElementsByClassName('wrapper')[0];
+            wrapper.className += ' wrapper--' + params['colour-scheme'];
+        }
+
+        function hideStats() {
+            if (params['stat-3'] == undefined) {
+                document.getElementsByClassName('stats__stat--3')[0].className += ' stats__stat--hidden';
+                document.getElementsByClassName('stats__stat--2')[0].className += ' stats__stat--last';
+            }
+
+            if (params['stat-2'] == undefined) {
+                document.getElementsByClassName('stats__stat--2')[0].className += ' stats__stat--hidden';
+                document.getElementsByClassName('stats__stat--1')[0].className += ' stats__stat--last';
+            }
+        }
+
+        function init() {
+            params = getPageParameters(document.location.href);
+
+            injectParams();
+            setClass();
+            hideStats();
+        }
+
+        init();
+    </script>
+</body>
