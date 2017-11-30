@@ -132,6 +132,7 @@
     <script type='text/javascript'>
         var data = [],
             question,
+            interactiveVersion,
             defaultUrl = '@@assetPath@@/embed/trump-russia-embeds/@@version@@/index.html';
 
         function buildUrlFromInputValues() {
@@ -163,9 +164,9 @@
                     if (rawQuestion.question !== '') {
                         data.push({
                             question: rawQuestion.question,
-                            image: 'https://interactive.guim.co.uk/atoms/2017/08/mapped-trump-russia/v/1512058111409/assets/images/cards/' + rawQuestion.image + '.png',
+                            image: 'https://interactive.guim.co.uk/atoms/2017/08/mapped-trump-russia/' + interactiveVersion + '/assets/images/cards/' + rawQuestion.image + '.png',
                             id: rawQuestion.question,
-                            url: 'https://www.theguardian.com/article/url/cool#' + rawQuestion.question
+                            url: 'https://www.theguardian.com/global/ng-interactive/2017/dec/6/donald-trump-russia-investigation-key-questions-latest-news-collusion-timeline#' + rawQuestion.question
                         });
                     }
                 }
@@ -203,8 +204,18 @@
             xhr.send();
         }
 
+        function getVersion() {
+            var client = new XMLHttpRequest();
+            client.onreadystatechange = function() {
+                interactiveVersion = client.responseText;
+                fetchQuestions();
+            };
+            client.open('GET', 'https://interactive.guim.co.uk/atoms/2017/08/mapped-trump-russia/live');
+            client.send();
+        }
+
         function init() {
-            fetchQuestions();
+            getVersion();
         }
 
         init();
