@@ -165,8 +165,8 @@
                         data.push({
                             question: rawQuestion.question,
                             image: 'https://interactive.guim.co.uk/atoms/2017/08/mapped-trump-russia/' + interactiveVersion + '/assets/images/cards/' + rawQuestion.image + '.png',
-                            id: rawQuestion.question,
-                            url: 'https://www.theguardian.com/global/ng-interactive/2017/dec/6/donald-trump-russia-investigation-key-questions-latest-news-collusion-timeline#' + rawQuestion.question
+                            id: handelise(rawQuestion.question),
+                            url: 'https://www.theguardian.com/global/ng-interactive/2017/dec/6/donald-trump-russia-investigation-key-questions-latest-news-collusion-timeline#' + handelise(rawQuestion.question) + '?CMP=articleembed'
                         });
                     }
                 }
@@ -175,6 +175,10 @@
                 bindings();
                 updateUrl();
             });
+        }
+
+        function handelise(string) {
+            return string.replace(/ /g, '-').replace('?', '').replace(/&/, 'and').replace(/'/g, '').replace(':', '').replace('/', '').toLowerCase();
         }
 
         function setQuestions() {
