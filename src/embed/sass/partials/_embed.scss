@@ -1,0 +1,75 @@
+body,
+html {
+    margin: 0;
+    font-family: 'Guardian Egyptian Web';
+    font-size: 18px;
+    max-width: 400px;
+}
+
+.link {
+    text-decoration: none;
+
+    &:hover {
+        .question {
+            color: $c-neutral-1;
+        }
+
+        .button {
+            background-color: $c-live-support-1;
+        }
+    }
+}
+
+.title {
+    font-size: 18px;
+    text-decoration: none;
+    color: $c-neutral-1;
+    margin: 0;
+}
+
+.wrapper {
+    position: relative;
+    border: 1px solid $c-neutral-5;
+    padding: 7px;
+    overflow: hidden;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        width: 100%;
+        background-color: $c-live-support-1;
+    }
+}
+
+.question {
+    margin: 0;
+    color: $c-live-support-1;
+    font-size: 18px;
+    padding-bottom: 47%;
+}
+
+.image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 110%;
+}
+
+.button {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 18px;
+    background-color: $c-neutral-1;
+    background-image: url('https://interactive.guim.co.uk/atoms/2017/08/mapped-trump-russia/v/1512058111409/assets/images/arrow-right.svg');
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center center;
+}
