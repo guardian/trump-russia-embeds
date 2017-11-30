@@ -8,7 +8,7 @@ A tool that generates NFL graphics for The Guardian US' NFL coverage.
 ## Development
 Clone this repo locally and run `npm i` to install dependancies.
 
-Once that's done you can run `npm run local` to run the project locally. The tool will be previewable on [localhost url](http://localhost:8080/tools/nfl-graphics/).
+Once that's done you can run `npm run local` to run the project locally. The tool will be previewable on [localhost url](http://localhost:8080/tools/trump-russia-graphics/).
 
 The `src` folder is where all the magic happens. Inside here you'll find an `embed` folder which includes sass and html for the embed itself. You'll also find a `tool` folder which contains a single html file for the tool.
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="." target="_blank">
+    <title>NFL Graphic</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+    <script src="https://interactive.guim.co.uk/libs/iframe-messenger/iframeMessenger.js"></script>
+    <script>
+        iframeMessenger.enableAutoResize();
+    </script> 
+
+    <link href="@@assetPath@@/embed/nfl-graphics/@@version@@/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <a class='link input' data-input='url'>
+        <h1 class='title'>Trump-russia investigation</h1>
+        <div class='wrapper'>
+            <h2 class='question input' data-input='question'></h2>
+            <img class='image input' data-input='image' />
+        </div>
+    </a>
+
+    <script type='text/javascript'>
+        var params;
+
+        function getPageParameters(query) {
+            var query = query.split('?')[1].split('&');
+            var data = {};
+
+            for (var i in query) {
+                if (query[i] !== 0) {
+                    var queryEntry = query[i].split('=');
+                    data[queryEntry[0]] = decodeURIComponent(queryEntry[1]);
+                }
+            }
+
+            console.log(data);
+
+            return data;
+        }
+
+        function injectParams() {
+            var elementsToBePopulated = document.getElementsByClassName('input');
+
+            for (var i = 0; i < elementsToBePopulated.length; i++) {
+                var elementKey = elementsToBePopulated[i].getAttribute('data-input');
+
+                if (params[elementKey]) {
+                    if (elementKey === 'image') {
+                        elementsToBePopulated[i].setAttribute('src', params[elementKey]);
+                    } else if (elementKey === 'url') {
+                        elementsToBePopulated[i].setAttribute('href', params[elementKey]);
+                    } else {
+                        elementsToBePopulated[i].innerHTML = params[elementKey];
+                    }
+                }
+            }
+        }
+
+        function init() {
+            params = getPageParameters(document.location.href);
+
+            injectParams();
+        }
+
+        init();
+    </script>
+</body>
